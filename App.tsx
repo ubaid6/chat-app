@@ -9,7 +9,7 @@
  */
 
 import React, { type PropsWithChildren } from 'react';
-// import {page} from './stylesheet';
+import {Register} from './Register';
 import {
   SafeAreaView,
   ScrollView,
@@ -23,10 +23,8 @@ import {
 
 const App = (): JSX.Element => {
   return (
-    <View>
-      
-    </View>
-  )
+    <Register/>
+  );
 }
 
 export default App;

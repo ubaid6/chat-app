@@ -14,14 +14,24 @@ import {
 } from 'react-native';
 
 
-const Register = (): JSX.Element => {
+export const Register = (): JSX.Element => {
 
     return (
         <View>
-            <Text style={register.text}>
+            <StatusBar backgroundColor={"cyan"}/>
+            <Text style={register.title}>
                 Hello! {'\n'}
                 Welcome to my Chat App!
             </Text>
+
+            <View style={register.bodyView}>
+                <Text style={register.bodyText}>
+                    Please enter your name
+                </Text>
+
+                <TextInput style={register.bodyInput}/>
+            </View>
+
         </View>
     );
 }

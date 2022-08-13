@@ -26,13 +26,19 @@ export const register = StyleSheet.create({
   bodyInput: {
     fontSize: 15,
     fontFamily: "monospace",
+    color:"black",
     textAlign:"center",
-    backgroundColor: "cyan",
+    backgroundColor: "transparent",
     opacity:1,
-    borderWidth: 0,
+    borderWidth: 1,
+    borderColor: "transparent",
+    borderBottomColor: "black",
+    marginLeft:50,
+    marginBottom:0,
     width: 300,
-    marginLeft: 40,
-  }
+  },
+
+
 });
 
 

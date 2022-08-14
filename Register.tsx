@@ -22,7 +22,6 @@ import { useNavigate } from 'react-router-native';
 const Register = (): JSX.Element => {
 
     const [name, setName] = useState("");
-    const [isValidName, setIsValidName] = useState(false);
     let navigate = useNavigate();
 
     const registerUsername = (): void => {
@@ -32,7 +31,7 @@ const Register = (): JSX.Element => {
         }
         else {
             console.log("Name entered: " + name);
-            setIsValidName(true);
+            navigate("/home");
         }
 
     }
@@ -46,14 +45,6 @@ const Register = (): JSX.Element => {
             }]
         );
     }
-
-    console.log(isValidName);
-    console.log(name);
-
-    useEffect(() => {
-        if (isValidName)
-            navigate("/home");
-    })
 
     return (
         <View>

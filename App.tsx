@@ -9,7 +9,9 @@
  */
 
 import React, { type PropsWithChildren } from 'react';
-import {Register} from './Register';
+import { NativeRouter, Route, Routes } from 'react-router-native';
+import Register from './Register';
+import Home from './Home';
 import {
   SafeAreaView,
   ScrollView,
@@ -23,7 +25,12 @@ import {
 
 const App = (): JSX.Element => {
   return (
-    <Register/>
+    <NativeRouter>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </NativeRouter>
   );
 }
 

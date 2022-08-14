@@ -1,5 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
-import { useState } from 'react';
+import React, { type PropsWithChildren, useState, useEffect } from 'react';
 import { register } from './stylesheet';
 import { StreamChat } from 'stream-chat';
 import {
@@ -14,21 +13,27 @@ import {
     TextInput,
     Alert
 } from 'react-native';
+import { useNavigate } from 'react-router-native';
 
 
 
 
-export const Register = (): JSX.Element => {
+const Register = (): JSX.Element => {
 
     const [name, setName] = useState("");
+    const [isValidName, setIsValidName] = useState(false);
+    let navigate = useNavigate();
 
     const registerUsername = (): void => {
-        if (name === "") {
+        if (name.length === 0) {
             console.log("Please enter a valid name");
             nameAlert();
         }
-        else
+        else {
             console.log("Name entered: " + name);
+            setIsValidName(true);
+        }
+
     }
 
     const nameAlert = (): void => {
@@ -40,6 +45,14 @@ export const Register = (): JSX.Element => {
             }]
         );
     }
+
+    console.log(isValidName);
+    console.log(name);
+
+    useEffect(() => {
+        if (isValidName)
+            navigate("/home");
+    })
 
     return (
         <View>

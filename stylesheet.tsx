@@ -38,6 +38,16 @@ export const register = StyleSheet.create({
     width: 300,
   },
 
+  submit: {
+    backgroundColor:"cyan",
+    alignItems:"center",
+    marginTop:20,
+    marginLeft:150,
+    width:100,
+    height:30,
+    borderRadius:20,
+  },
+
 
 });
 

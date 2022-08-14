@@ -11,7 +11,8 @@ import {
     View,
     Button,
     TextInput,
-    Alert
+    Alert,
+    TouchableOpacity
 } from 'react-native';
 import { useNavigate } from 'react-router-native';
 
@@ -72,10 +73,14 @@ const Register = (): JSX.Element => {
                     onChangeText={newName => setName(newName)}
                 />
 
-                <Button
-                    title="Submit"
-                    onPress={registerUsername}
-                />
+                <TouchableOpacity
+                style = {register.submit}
+                onPress = {registerUsername}
+                >
+                    <Text style={register.bodyText}>
+                        Submit
+                    </Text>
+                </TouchableOpacity>
             </View>
 
         </View>

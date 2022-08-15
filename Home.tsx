@@ -5,9 +5,12 @@ import {
     Text,
     Button,
 } from 'react-native';
+import { StreamChat } from 'stream-chat';
 
 
 const Home = (): JSX.Element => {
+
+    const client = StreamChat.getInstance("");
 
     return (
         <View>
@@ -17,5 +20,7 @@ const Home = (): JSX.Element => {
         </View>
     );
 }
+
+
 
 export default Home;

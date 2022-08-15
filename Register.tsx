@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { register } from './stylesheet';
 import { StreamChat } from 'stream-chat';
 import {
@@ -15,11 +15,14 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { useNavigate } from 'react-router-native';
+import { UserContext } from './UserContext';
 
 
 
 
 const Register = (): JSX.Element => {
+
+    const { user, setUser } = useContext(UserContext);
 
     const [name, setName] = useState("");
     let navigate = useNavigate();
@@ -31,6 +34,12 @@ const Register = (): JSX.Element => {
         }
         else {
             console.log("Name entered: " + name);
+            setUser(name);
+            connectClient().then(
+                () => console.log("Client connected!")
+            ).catch(
+                (e) => console.log(e)
+            )
             navigate("/home");
         }
 
@@ -65,8 +74,8 @@ const Register = (): JSX.Element => {
                 />
 
                 <TouchableOpacity
-                style = {register.submit}
-                onPress = {registerUsername}
+                    style={register.submit}
+                    onPress={registerUsername}
                 >
                     <Text style={register.bodyText}>
                         Submit
@@ -77,6 +86,21 @@ const Register = (): JSX.Element => {
         </View>
     );
 }
+
+export const connectClient = async ():Promise<any> => {
+    const client = StreamChat.getInstance("");
+
+    await client.connectUser(
+        {
+            id: 'ubaid',
+            name: 'Ubaid',
+            image: 'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg',
+        },
+       client.devToken('ubaid'),
+    );
+
+}
+
 
 
 export default Register;

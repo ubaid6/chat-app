@@ -8,10 +8,11 @@
  * @format
  */
 
-import React, { type PropsWithChildren } from 'react';
+import React, { useState } from 'react';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import Register from './Register';
 import Home from './Home';
+import { UserContext } from './UserContext';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,12 +25,17 @@ import {
 } from 'react-native';
 
 const App = (): JSX.Element => {
+
+  const [user, setUser] = useState(null);
+
   return (
     <NativeRouter>
-      <Routes>
-        <Route path="/" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-      </Routes>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Routes>
+          <Route path="/" element={<Register />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </UserContext.Provider>
     </NativeRouter>
   );
 }

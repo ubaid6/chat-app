@@ -6,11 +6,12 @@ import {
     Button,
 } from 'react-native';
 import { StreamChat } from 'stream-chat';
+import { apiKeys } from './config';
 
 
 const Home = (): JSX.Element => {
 
-    const client = StreamChat.getInstance("");
+    const client = StreamChat.getInstance(apiKeys.API_KEY);
 
     return (
         <View>

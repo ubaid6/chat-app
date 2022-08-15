@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { useNavigate } from 'react-router-native';
 import { UserContext } from './UserContext';
+import { apiKeys } from './config';
 
 
 
@@ -35,7 +36,7 @@ const Register = (): JSX.Element => {
         else {
             console.log("Name entered: " + name);
             setUser(name);
-            connectClient().then(
+            connectClient(name).then(
                 () => console.log("Client connected!")
             ).catch(
                 (e) => console.log(e)
@@ -87,16 +88,16 @@ const Register = (): JSX.Element => {
     );
 }
 
-export const connectClient = async ():Promise<any> => {
-    const client = StreamChat.getInstance("");
+export const connectClient = async (username:string):Promise<any> => {
+    const client = StreamChat.getInstance(apiKeys.API_KEY);
 
     await client.connectUser(
         {
-            id: 'ubaid',
-            name: 'Ubaid',
+            id: username.toLowerCase(),
+            name: username,
             image: 'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg',
         },
-       client.devToken('ubaid'),
+       client.devToken(username.toLowerCase()),
     );
 
 }

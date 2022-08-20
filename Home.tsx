@@ -5,26 +5,32 @@ import {
     Text,
     Button,
     TouchableOpacity,
+    ScrollView,
 } from 'react-native';
 import { Channel, DefaultGenerics, StreamChat } from 'stream-chat';
 import { apiKeys } from './config';
-import { register } from './stylesheet';
+import { home, register } from './stylesheet';
 
 
 const Home = (): JSX.Element => {
 
     const [channels, setChannels] = useState<Array<any>>([]);
+    let navigate = useNavigate();
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
-    const createChannel = (): void => {
-        makeChannel().then(
-            (result: any) => console.log("Channel created")
-        )
-        .catch(
-            (e) => console.log(e)
-        );
+    const createChannel = () : void => {
+        navigate('/create-channel');
     }
+
+    // const createChannel = (): void => {
+    //     makeChannel().then(
+    //         (result: any) => console.log("Channel created")
+    //     )
+    //         .catch(
+    //             (e) => console.log(e)
+    //         );
+    // }
 
 
     const makeChannel = async (): Promise<any> => {
@@ -48,16 +54,20 @@ const Home = (): JSX.Element => {
     );
 
     return (
-        <View>
-            <TouchableOpacity style={register.submit} onPress={createChannel}>
+        <>
+            <View>
+                <TouchableOpacity style={register.submit} onPress={createChannel}>
+                    <Text>
+                        Make Channel
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            <ScrollView style={home.channels}>
                 <Text>
-                    Make Channel
+                    {channels.length === 0 ? "Undefined" : channels.map((channel) => channel.data.name)}
                 </Text>
-            </TouchableOpacity>
-            <Text>
-                {channels.length === 0? "Undefined" : channels.map((channel) => channel.data.name)}
-            </Text>
-        </View>
+            </ScrollView>
+        </>
     );
 }
 

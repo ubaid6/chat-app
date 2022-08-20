@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { NativeRouter, Route, Routes } from 'react-router-native';
 import Register from './Register';
 import Home from './Home';
+import CreateChannel from './CreateChannel';
 import { UserContext } from './UserContext';
 import {
   SafeAreaView,
@@ -34,6 +35,7 @@ const App = (): JSX.Element => {
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/create-channel" element={<CreateChannel />}/>
         </Routes>
       </UserContext.Provider>
     </NativeRouter>

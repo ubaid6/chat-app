@@ -52,6 +52,23 @@ export const register = StyleSheet.create({
 });
 
 
+export const home = StyleSheet.create({
+  channels : {
+    backgroundColor: "red",
+    height : 1000,
+
+  },
+});
+
+
+export const createChannel = StyleSheet.create({
+  back : {
+    marginTop:20,
+    marginLeft:10
+  },
+});
+
+
 
 
 

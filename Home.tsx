@@ -6,10 +6,12 @@ import {
     Button,
     TouchableOpacity,
     ScrollView,
+    Image,
 } from 'react-native';
 import { Channel, DefaultGenerics, StreamChat } from 'stream-chat';
 import { apiKeys } from './config';
 import { home, register } from './stylesheet';
+import ChannelCard from './ChannelCard';
 
 
 const Home = (): JSX.Element => {
@@ -20,7 +22,7 @@ const Home = (): JSX.Element => {
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
-    const createChannel = () : void => {
+    const createChannel = (): void => {
         navigate('/create-channel');
     }
 
@@ -37,26 +39,21 @@ const Home = (): JSX.Element => {
             setChannels(result);
             channelsQueried(true);
             return;
-        }
-    ).then(
-        () => console.log("channels set")
-    ).catch(
-        (e) => console.log(e)
+        }).catch(
+            (e) => console.log(e)
+        );
+
+    const channelList = channels.map((channel) =>
+        <ChannelCard key={channel.data.id} name={channel.data.name}/>
     );
 
     return (
         <>
-            <View>
-                <TouchableOpacity style={register.submit} onPress={createChannel}>
-                    <Text>
-                        Make Channel
-                    </Text>
-                </TouchableOpacity>
-            </View>
             <ScrollView style={home.channels}>
-                <Text>
-                    {channels.length === 0 ? "Undefined" : channels.map((channel) => channel.data.name)}
-                </Text>
+                {channelList}
+                <TouchableOpacity onPress={createChannel}>
+                    <Image source={require('./images/create-chat-icon.png')} />
+                </TouchableOpacity>
             </ScrollView>
         </>
     );

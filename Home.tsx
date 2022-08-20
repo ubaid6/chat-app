@@ -15,6 +15,7 @@ import { home, register } from './stylesheet';
 const Home = (): JSX.Element => {
 
     const [channels, setChannels] = useState<Array<any>>([]);
+    const [isChannelsQueried, channelsQueried] = useState<boolean>(false);
     let navigate = useNavigate();
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
@@ -23,22 +24,6 @@ const Home = (): JSX.Element => {
         navigate('/create-channel');
     }
 
-    // const createChannel = (): void => {
-    //     makeChannel().then(
-    //         (result: any) => console.log("Channel created")
-    //     )
-    //         .catch(
-    //             (e) => console.log(e)
-    //         );
-    // }
-
-
-    const makeChannel = async (): Promise<any> => {
-        const channel = client.channel('messaging', 'newChannel', {
-            name: 'My Channel',
-        });
-        await channel.create();
-    }
 
     const queryChannels = async (): Promise<any> => {
         const channelList = await client.queryChannels({});
@@ -46,7 +31,13 @@ const Home = (): JSX.Element => {
     }
 
     queryChannels().then(
-        (result) => setChannels(result)
+        (result) => {
+            if (isChannelsQueried)
+                return;
+            setChannels(result);
+            channelsQueried(true);
+            return;
+        }
     ).then(
         () => console.log("channels set")
     ).catch(

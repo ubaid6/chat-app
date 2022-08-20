@@ -61,7 +61,7 @@ export const home = StyleSheet.create({
 });
 
 
-export const createChannel = StyleSheet.create({
+export const create_channel = StyleSheet.create({
   back : {
     marginTop:20,
     marginLeft:10

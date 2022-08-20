@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { register } from './stylesheet';
-import { StreamChat } from 'stream-chat';
+import { DefaultGenerics, StreamChat } from 'stream-chat';
 import {
     SafeAreaView,
     ScrollView,
@@ -24,7 +24,6 @@ import { apiKeys } from './config';
 const Register = (): JSX.Element => {
 
     const { user, setUser } = useContext(UserContext);
-
     const [name, setName] = useState("");
     let navigate = useNavigate();
 
@@ -35,7 +34,7 @@ const Register = (): JSX.Element => {
         }
         else {
             console.log("Name entered: " + name);
-            setUser(name);
+            setUser(name.toLowerCase());
             connectClient(name).then(
                 () => console.log("Client connected!")
             ).catch(
@@ -88,8 +87,8 @@ const Register = (): JSX.Element => {
     );
 }
 
-export const connectClient = async (username:string):Promise<any> => {
-    const client = StreamChat.getInstance(apiKeys.API_KEY);
+const connectClient = async (username:string):Promise<any> => {
+    const client : StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
     await client.connectUser(
         {

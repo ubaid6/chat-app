@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Image, ScrollView, StatusBar, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-native";
 import { DefaultGenerics, StreamChat } from "stream-chat";
 import { apiKeys } from "./config";
@@ -11,7 +11,7 @@ const Channel = (props: any): JSX.Element => {
 
     let navigate = useNavigate();
     const { channelId, setChannelId } = useContext(ChannelContext);
-    const [currentChannel, setCurrentChannel] = useState([]);
+    const [currentChannel, setCurrentChannel] = useState<any>(null);
     const [message, setMessage] = useState("");
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
@@ -38,15 +38,21 @@ const Channel = (props: any): JSX.Element => {
         <>
             <StatusBar backgroundColor={"cyan"} />
 
-
-            <View style={register.title}>
-                <TouchableOpacity onPress={() => navigate('/home')}>
-                    <Image style={create_channel.back} source={require("./images/back.png")} />
-                </TouchableOpacity>
+            <View style={channel.header}>
+                <View style={channel.back}>
+                    <TouchableOpacity onPress={() => navigate('/home')}>
+                        <Image source={require("./images/back.png")} />
+                    </TouchableOpacity>
+                </View>
+                <View style={channel.title}>
+                    <Text style={channel.title_text}>
+                        {currentChannel === null ? "" : currentChannel.data.name}
+                    </Text>
+                </View>
             </View>
 
             <ScrollView style={channel.messages}>
-                
+
             </ScrollView>
 
             <View style={channel.message_box}>

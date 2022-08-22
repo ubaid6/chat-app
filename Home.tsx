@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-native';
 import {
     View,
@@ -34,16 +34,18 @@ const Home = (): JSX.Element => {
         return channelList;
     }
 
-    queryChannels().then(
-        (result) => {
-            if (isChannelsQueried)
+    useEffect(() => {
+        queryChannels().then(
+            (result) => {
+                if (isChannelsQueried)
+                    return;
+                setChannels(result);
+                channelsQueried(true);
                 return;
-            setChannels(result);
-            channelsQueried(true);
-            return;
-        }).catch(
-            (e) => console.log(e)
-        );
+            }).catch(
+                (e) => console.log(e)
+            );
+    }, []);
 
     const channelList = channels.map((channel) =>
         <ChannelCard key={channel.id} name={channel.data.name} id={channel.id} />

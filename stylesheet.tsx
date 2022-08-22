@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet} from "react-native";
 
 export const register = StyleSheet.create({
   title: {
@@ -96,31 +96,57 @@ export const channel_card = StyleSheet.create({
 
 
 export const channel = StyleSheet.create({
+
+  header: {
+    backgroundColor: "cyan",
+    height: 70,
+    textAlign:"center",
+    flexDirection:"row",
+  },
+
+  back: {
+    marginTop: 20,
+    marginLeft: 10,
+  },
+
+  title : {
+    marginTop:15,
+    width:350,
+    textAlign:"center",
+    color:"black",
+
+  },
+
+  title_text : {
+    textAlign:"center",
+    fontFamily:"monospace",
+    fontSize:30,
+    color:"black",
+  },
+
   messages: {
-    // backgroundColor:"green",
     flex: 1,
   },
 
   message_box: {
-    // backgroundColor:"red",
     flex: 0.2,
-    flexDirection:"row",
+    flexDirection: "row",
   },
 
   input: {
     backgroundColor: "rgba(211, 206, 206, 0.4)",
     maxHeight: 150,
     borderRadius: 20,
-    lineHeight:300,
-    flex:3,
-    marginLeft:5,
-    alignSelf:"flex-end",
-    marginBottom:5,
+    lineHeight: 300,
+    flex: 3,
+    marginLeft: 5,
+    alignSelf: "flex-end",
+    marginBottom: 5,
   },
 
   send_image: {
-    alignSelf:"flex-end",
-    marginBottom:10,
+    alignSelf: "flex-end",
+    marginBottom: 10,
   }
 
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useLocation, useNavigate } from "react-router-native";
 import { DefaultGenerics, StreamChat } from "stream-chat";
@@ -6,7 +6,6 @@ import { apiKeys } from "./config";
 import { channel, create_channel, register } from "./stylesheet";
 import { ChannelContext, UserContext } from "./Context";
 import Message from "./Message";
-
 
 
 const Channel = (props: any): JSX.Element => {
@@ -17,6 +16,7 @@ const Channel = (props: any): JSX.Element => {
     const [message, setMessage] = useState<string>("");
     const [messages, setMessages] = useState<Array<any>>([]);
     const [oldRefresh, refresh] = useState([0]);
+    const scrollViewRef = useRef<any>();
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
@@ -32,7 +32,7 @@ const Channel = (props: any): JSX.Element => {
         });
     }
 
-    const handleSendMessage = ():void => {
+    const handleSendMessage = (): void => {
         sendMessage().then(
             () => {
                 setMessage("");
@@ -65,7 +65,7 @@ const Channel = (props: any): JSX.Element => {
         )
     }, [oldRefresh]);
 
-    const messageList:JSX.Element[] = messages.map((msg) =>
+    const messageList: JSX.Element[] = messages.map((msg) =>
         <Message text={msg.text} />
     );
 
@@ -86,7 +86,11 @@ const Channel = (props: any): JSX.Element => {
                 </View>
             </View>
 
-            <ScrollView style={channel.messages}>
+            <ScrollView
+                style={channel.messages}
+                ref={scrollViewRef}
+                onContentSizeChange={() => scrollViewRef.current.scrollToEnd()}
+            >
                 {messageList}
             </ScrollView>
 
@@ -111,4 +115,5 @@ const Channel = (props: any): JSX.Element => {
 }
 
 export default Channel;
+
 

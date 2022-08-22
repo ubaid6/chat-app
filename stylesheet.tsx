@@ -126,6 +126,7 @@ export const channel = StyleSheet.create({
 
   messages: {
     flex: 1,
+    minHeight:100,
   },
 
   message_box: {

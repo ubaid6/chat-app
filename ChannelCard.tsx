@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Image, StatusBar, Text, TouchableOpacity, View } from "react-native";
-import { useNavigate } from "react-router-native";
+import { Navigate, useNavigate } from "react-router-native";
 import { channel_card, create_channel, register } from "./stylesheet";
+import { ChannelContext, UserContext } from "./Context";
 
 
 const ChannelCard = (props: any): JSX.Element => {
 
+    let navigate = useNavigate();
+    const { channelId, setChannelId } = useContext(ChannelContext);
+
+    const handlePress = (): void => {
+        setChannelId(props.id);
+        navigate('/channel');
+    }
+
     return (
         <>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handlePress}>
                 <View style={channel_card.card}>
                     <View style={channel_card.image}>
                         <Image source={require('./images/user.png')} />

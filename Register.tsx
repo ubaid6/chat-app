@@ -15,7 +15,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { useNavigate } from 'react-router-native';
-import { UserContext } from './UserContext';
+import { UserContext } from './Context';
 import { apiKeys } from './config';
 
 
@@ -100,7 +100,6 @@ const connectClient = async (username:string):Promise<any> => {
     );
 
 }
-
 
 
 export default Register;

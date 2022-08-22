@@ -13,7 +13,7 @@ import { NativeRouter, Route, Routes } from 'react-router-native';
 import Register from './Register';
 import Home from './Home';
 import CreateChannel from './CreateChannel';
-import { UserContext } from './UserContext';
+import { ChannelContext, UserContext } from './Context';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,19 +24,24 @@ import {
   View,
   Button,
 } from 'react-native';
+import Channel from './Channel';
 
 const App = (): JSX.Element => {
 
   const [user, setUser] = useState(null);
+  const [channelId, setChannelId] = useState("");
 
   return (
     <NativeRouter>
       <UserContext.Provider value={{ user, setUser }}>
-        <Routes>
-          <Route path="/" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/create-channel" element={<CreateChannel />}/>
-        </Routes>
+        <ChannelContext.Provider value={{channelId, setChannelId}}>
+          <Routes>
+            <Route path="/" element={<Register />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/create-channel" element={<CreateChannel />} />
+            <Route path="/channel" element={<Channel />} />
+          </Routes>
+        </ChannelContext.Provider>
       </UserContext.Provider>
     </NativeRouter>
   );

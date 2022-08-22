@@ -13,6 +13,7 @@ import { Channel, DefaultGenerics, StreamChat } from 'stream-chat';
 import { apiKeys } from './config';
 import { create_channel, home, register } from './stylesheet';
 import ChannelCard from './ChannelCard';
+import { UserContext } from './Context';
 
 
 const Home = (): JSX.Element => {
@@ -45,12 +46,12 @@ const Home = (): JSX.Element => {
         );
 
     const channelList = channels.map((channel) =>
-        <ChannelCard key={channel.data.id} name={channel.data.name} />
+        <ChannelCard key={channel.id} name={channel.data.name} id={channel.id} />
     );
 
     return (
         <>
-            <StatusBar backgroundColor={"cyan"}/>
+            <StatusBar backgroundColor={"cyan"} />
             <ScrollView style={home.channels}>
                 {channelList}
                 <TouchableOpacity style={home.image} onPress={createChannel}>

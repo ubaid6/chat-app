@@ -54,10 +54,10 @@ const Home = (): JSX.Element => {
             <StatusBar backgroundColor={"cyan"} />
             <ScrollView style={home.channels}>
                 {channelList}
-                <TouchableOpacity style={home.image} onPress={createChannel}>
-                    <Image source={require('./images/create-chat-icon.png')} />
-                </TouchableOpacity>
             </ScrollView>
+            <TouchableOpacity style={home.create_channel_button} onPress={createChannel}>
+                <Image source={require('./images/create-chat-icon.png')} />
+            </TouchableOpacity>
         </>
     );
 }

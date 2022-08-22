@@ -26,26 +26,26 @@ export const register = StyleSheet.create({
   bodyInput: {
     fontSize: 15,
     fontFamily: "monospace",
-    color:"black",
-    textAlign:"center",
+    color: "black",
+    textAlign: "center",
     backgroundColor: "transparent",
-    opacity:1,
+    opacity: 1,
     borderWidth: 1,
     borderColor: "transparent",
     borderBottomColor: "black",
-    marginLeft:50,
-    marginBottom:0,
+    marginLeft: 50,
+    marginBottom: 0,
     width: 300,
   },
 
   submit: {
-    backgroundColor:"cyan",
-    alignItems:"center",
-    marginTop:20,
-    marginLeft:150,
-    width:100,
-    height:30,
-    borderRadius:20,
+    backgroundColor: "cyan",
+    alignItems: "center",
+    marginTop: 20,
+    marginLeft: 150,
+    width: 100,
+    height: 30,
+    borderRadius: 20,
   },
 
 
@@ -53,46 +53,79 @@ export const register = StyleSheet.create({
 
 
 export const home = StyleSheet.create({
-  channels : {
-    height : 1000,
+  channels: {
+    height: 1000,
 
   },
 
-  image : {
-    position:"relative",
-    alignSelf:"flex-end",
-    marginTop:500,
+  create_channel_button: {
+    position: "absolute",
+    alignSelf: "flex-end",
+    marginTop: 650,
   }
 
 });
 
 
 export const create_channel = StyleSheet.create({
-  back : {
-    marginTop:20,
-    marginLeft:10
+  back: {
+    marginTop: 20,
+    marginLeft: 10
   },
 });
 
 export const channel_card = StyleSheet.create({
-  card : {
-    borderBottomWidth:1,
-    height:50,
-    paddingBottom:10,
+  card: {
+    borderBottomWidth: 1,
+    height: 50,
+    paddingBottom: 10,
+    flexDirection: "row",
+  },
+
+  image: {
+    width: 50,
+    paddingTop: 10,
+  },
+
+  text: {
+    width: 200,
+    alignSelf: "center",
+    marginBottom: 0,
+  },
+})
+
+
+export const channel = StyleSheet.create({
+  messages: {
+    // backgroundColor:"green",
+    flex: 1,
+  },
+
+  message_box: {
+    // backgroundColor:"red",
+    flex: 0.2,
     flexDirection:"row",
   },
 
-  image : {
-    width:50,
-    paddingTop:10,
+  input: {
+    backgroundColor: "rgba(211, 206, 206, 0.4)",
+    maxHeight: 150,
+    borderRadius: 20,
+    lineHeight:300,
+    flex:3,
+    marginLeft:5,
+    alignSelf:"flex-end",
+    marginBottom:5,
   },
 
-  text : {
-    width:200,
-    alignSelf:"center",
-    marginBottom:0,
-  },
-})
+  send_image: {
+    alignSelf:"flex-end",
+    marginBottom:10,
+  }
+
+
+
+});
 
 
 

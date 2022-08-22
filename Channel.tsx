@@ -12,7 +12,7 @@ const Channel = (props: any): JSX.Element => {
     let navigate = useNavigate();
     const { channelId, setChannelId } = useContext(ChannelContext);
     const [currentChannel, setCurrentChannel] = useState<any>(null);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState<string>("");
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
@@ -22,11 +22,18 @@ const Channel = (props: any): JSX.Element => {
         return channel;
     }
 
+    const sendMessage = async (): Promise<any> => {
+        await currentChannel.sendMessage({
+            text: message,
+        });
+    }
+
+
+
     useEffect(() => {
         queryChannel().then(
             (result) => {
                 setCurrentChannel(result[0]);
-                console.log(result[0].data.name);
             }
         ).catch(
             (e) => console.log(e)
@@ -62,9 +69,9 @@ const Channel = (props: any): JSX.Element => {
                     onChangeText={(newMessage) => setMessage(newMessage)}
                 />
                 <TouchableOpacity
-                    style={channel.send_image
-
-                    }>
+                    style={channel.send_image}
+                    onPress={sendMessage}
+                >
                     <Image
                         source={require('./images/send.png')}
                     />

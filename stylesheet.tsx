@@ -142,6 +142,7 @@ export const channel = StyleSheet.create({
     marginLeft: 5,
     alignSelf: "flex-end",
     marginBottom: 5,
+    paddingLeft:10,
   },
 
   send_image: {

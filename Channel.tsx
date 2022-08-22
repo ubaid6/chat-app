@@ -5,6 +5,8 @@ import { DefaultGenerics, StreamChat } from "stream-chat";
 import { apiKeys } from "./config";
 import { channel, create_channel, register } from "./stylesheet";
 import { ChannelContext, UserContext } from "./Context";
+import Message from "./Message";
+
 
 
 const Channel = (props: any): JSX.Element => {
@@ -13,6 +15,7 @@ const Channel = (props: any): JSX.Element => {
     const { channelId, setChannelId } = useContext(ChannelContext);
     const [currentChannel, setCurrentChannel] = useState<any>(null);
     const [message, setMessage] = useState<string>("");
+    const [messages, setMessages] = useState<Array<any>>([]);
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
@@ -29,17 +32,22 @@ const Channel = (props: any): JSX.Element => {
     }
 
 
-
     useEffect(() => {
         queryChannel().then(
             (result) => {
                 setCurrentChannel(result[0]);
+                setMessages(result[0].state.messages);
+                return;
             }
         ).catch(
             (e) => console.log(e)
         )
     }, []);
 
+
+    const messageList = messages.map((msg) =>
+        <Message text={msg.text} />
+    );
 
     return (
         <>
@@ -59,7 +67,7 @@ const Channel = (props: any): JSX.Element => {
             </View>
 
             <ScrollView style={channel.messages}>
-
+                {messageList}
             </ScrollView>
 
             <View style={channel.message_box}>

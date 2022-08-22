@@ -16,6 +16,7 @@ const Channel = (props: any): JSX.Element => {
     const [currentChannel, setCurrentChannel] = useState<any>(null);
     const [message, setMessage] = useState<string>("");
     const [messages, setMessages] = useState<Array<any>>([]);
+    const [oldRefresh, refresh] = useState([0]);
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
@@ -32,8 +33,14 @@ const Channel = (props: any): JSX.Element => {
     }
 
     const handleSendMessage = ():void => {
-        sendMessage();
-        setMessage("");
+        sendMessage().then(
+            () => {
+                setMessage("");
+                refresh([...oldRefresh]);
+            }
+        ).catch(
+            (e) => console.log(e)
+        );
         return;
     }
 
@@ -42,12 +49,21 @@ const Channel = (props: any): JSX.Element => {
             (result) => {
                 setCurrentChannel(result[0]);
                 setMessages(result[0].state.messages);
-                return;
             }
         ).catch(
             (e) => console.log(e)
         )
     }, []);
+
+    useEffect(() => {
+        queryChannel().then(
+            (result) => {
+                setMessages(result[0].state.messages);
+            }
+        ).catch(
+            (e) => console.log(e)
+        )
+    }, [oldRefresh]);
 
     const messageList:JSX.Element[] = messages.map((msg) =>
         <Message text={msg.text} />

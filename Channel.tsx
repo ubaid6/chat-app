@@ -31,6 +31,11 @@ const Channel = (props: any): JSX.Element => {
         });
     }
 
+    const handleSendMessage = ():void => {
+        sendMessage();
+        setMessage("");
+        return;
+    }
 
     useEffect(() => {
         queryChannel().then(
@@ -44,8 +49,7 @@ const Channel = (props: any): JSX.Element => {
         )
     }, []);
 
-
-    const messageList = messages.map((msg) =>
+    const messageList:JSX.Element[] = messages.map((msg) =>
         <Message text={msg.text} />
     );
 
@@ -74,11 +78,12 @@ const Channel = (props: any): JSX.Element => {
                 <TextInput
                     style={channel.input}
                     multiline={true}
+                    value={message}
                     onChangeText={(newMessage) => setMessage(newMessage)}
                 />
                 <TouchableOpacity
                     style={channel.send_image}
-                    onPress={sendMessage}
+                    onPress={handleSendMessage}
                 >
                     <Image
                         source={require('./images/send.png')}

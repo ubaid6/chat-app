@@ -134,10 +134,9 @@ export const channel = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "rgba(211, 206, 206, 0.4)",
+    backgroundColor: "rgba(211, 206, 206, 0.7)",
     maxHeight: 150,
     borderRadius: 20,
-    lineHeight: 300,
     flex: 3,
     marginLeft: 5,
     alignSelf: "flex-end",
@@ -148,6 +147,19 @@ export const channel = StyleSheet.create({
   send_image: {
     alignSelf: "flex-end",
     marginBottom: 10,
+  },
+
+  author_message : {
+    backgroundColor:"red",
+    marginBottom:3,
+    marginTop:3,
+    height:30,
+    paddingTop:5,
+    paddingLeft:5,
+    flexDirection:"row",
+    width:250,
+    alignSelf:"flex-end",
+    borderRadius:20,
   }
 
 

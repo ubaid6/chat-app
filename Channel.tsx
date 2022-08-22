@@ -66,7 +66,7 @@ const Channel = (props: any): JSX.Element => {
     }, [oldRefresh]);
 
     const messageList: JSX.Element[] = messages.map((msg) =>
-        <Message text={msg.text} />
+        <Message key={msg.id} text={msg.text} />
     );
 
     return (

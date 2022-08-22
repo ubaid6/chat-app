@@ -151,20 +151,24 @@ export const channel = StyleSheet.create({
   },
 
   author_message : {
-    backgroundColor:"red",
+    backgroundColor:"green",
     marginBottom:3,
     marginTop:3,
-    height:30,
-    paddingTop:5,
     paddingLeft:5,
+    paddingTop:5,
+    paddingBottom:5,
+    paddingRight:5,
     flexDirection:"row",
-    width:250,
+    maxHeight:300,
+    minHeight:30,
+    width:150,
     alignSelf:"flex-end",
-    borderRadius:20,
+    borderRadius:10,
+  },
+
+  message_text : {
+    color:"black",
   }
-
-
-
 });
 
 

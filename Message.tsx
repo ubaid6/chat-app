@@ -8,7 +8,7 @@ const Message = (props: any): JSX.Element => {
     return (
         <>
             <View style={channel.author_message}>
-                <Text>
+                <Text style={channel.message_text}>
                     {props.text}
                 </Text>
             </View>

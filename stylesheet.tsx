@@ -55,11 +55,13 @@ export const register = StyleSheet.create({
 export const home = StyleSheet.create({
   channels : {
     height : 1000,
+
   },
 
   image : {
-    color:"red",
-    
+    position:"relative",
+    alignSelf:"flex-end",
+    marginTop:500,
   }
 
 });
@@ -74,9 +76,8 @@ export const create_channel = StyleSheet.create({
 
 export const channel_card = StyleSheet.create({
   card : {
-    borderWidth:0.2,
+    borderBottomWidth:1,
     height:50,
-    paddingTop:0,
     paddingBottom:10,
     flexDirection:"row",
   },

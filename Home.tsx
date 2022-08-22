@@ -7,10 +7,11 @@ import {
     TouchableOpacity,
     ScrollView,
     Image,
+    StatusBar,
 } from 'react-native';
 import { Channel, DefaultGenerics, StreamChat } from 'stream-chat';
 import { apiKeys } from './config';
-import { home, register } from './stylesheet';
+import { create_channel, home, register } from './stylesheet';
 import ChannelCard from './ChannelCard';
 
 
@@ -44,14 +45,15 @@ const Home = (): JSX.Element => {
         );
 
     const channelList = channels.map((channel) =>
-        <ChannelCard key={channel.data.id} name={channel.data.name}/>
+        <ChannelCard key={channel.data.id} name={channel.data.name} />
     );
 
     return (
         <>
+            <StatusBar backgroundColor={"cyan"}/>
             <ScrollView style={home.channels}>
                 {channelList}
-                <TouchableOpacity onPress={createChannel}>
+                <TouchableOpacity style={home.image} onPress={createChannel}>
                     <Image source={require('./images/create-chat-icon.png')} />
                 </TouchableOpacity>
             </ScrollView>

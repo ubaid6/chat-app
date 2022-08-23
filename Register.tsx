@@ -25,6 +25,7 @@ const Register = (): JSX.Element => {
 
     const { user, setUser } = useContext(UserContext);
     const [name, setName] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
     let navigate = useNavigate();
 
     const registerUsername = (): void => {
@@ -33,9 +34,11 @@ const Register = (): JSX.Element => {
             nameAlert();
         }
         else {
+
+
             console.log("Name entered: " + name);
             setUser(name.toLowerCase());
-            connectClient(name).then(
+            connectClient(name, imageUrl).then(
                 () => console.log("Client connected!")
             ).catch(
                 (e) => console.log(e)
@@ -73,6 +76,17 @@ const Register = (): JSX.Element => {
                     onChangeText={newName => setName(newName)}
                 />
 
+                <Text>{'\n'}</Text>
+
+                <Text style={register.bodyText}>
+                    Enter an image URL
+                </Text>
+
+                <TextInput
+                    style={register.bodyInput}
+                    onChangeText={newUrl => setImageUrl(newUrl)}
+                />
+
                 <TouchableOpacity
                     style={register.submit}
                     onPress={registerUsername}
@@ -81,22 +95,25 @@ const Register = (): JSX.Element => {
                         Submit
                     </Text>
                 </TouchableOpacity>
+
             </View>
 
         </View>
     );
 }
 
-const connectClient = async (username:string):Promise<any> => {
-    const client : StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
+const connectClient = async (username: string, imageUrl: string): Promise<any> => {
+    const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
     await client.connectUser(
         {
             id: username.toLowerCase(),
             name: username,
-            image: 'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg',
+            image: imageUrl.length === 0 ?
+                "https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg" :
+                imageUrl,
         },
-       client.devToken(username.toLowerCase()),
+        client.devToken(username.toLowerCase()),
     );
 
 }

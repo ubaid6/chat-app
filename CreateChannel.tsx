@@ -29,7 +29,8 @@ const CreateChannel = (): JSX.Element => {
 
         const makeChannel = async (): Promise<any> => {
             const usersToAdd = selectedUsers.map((user) => user.id);
-            const channel = client.channel('messaging', name.toLowerCase(), {
+            const channelId = name.trim().replace(/ /g, "");
+            const channel = client.channel('messaging', channelId, {
                 name: name,
                 members: [user, ...usersToAdd],
             });
@@ -38,7 +39,7 @@ const CreateChannel = (): JSX.Element => {
     
 
         makeChannel().then(
-            (result: any) => console.log("Channel created")
+            (result: any) => navigate('/home')
         )
             .catch(
                 (e) => console.log(e)

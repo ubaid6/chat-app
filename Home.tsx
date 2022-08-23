@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-native';
 import {
     View,
@@ -20,6 +20,7 @@ const Home = (): JSX.Element => {
 
     const [channels, setChannels] = useState<Array<any>>([]);
     const [isChannelsQueried, channelsQueried] = useState<boolean>(false);
+    const {user, setUser} = useContext(UserContext);
     let navigate = useNavigate();
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
@@ -30,7 +31,8 @@ const Home = (): JSX.Element => {
 
 
     const queryChannels = async (): Promise<any> => {
-        const channelList = await client.queryChannels({});
+        const filter = {members: { $in: [user] }}
+        const channelList = await client.queryChannels(filter, {});
         return channelList;
     }
 
@@ -47,7 +49,7 @@ const Home = (): JSX.Element => {
             );
     }, []);
 
-    const channelList = channels.map((channel) =>
+    const channelList:JSX.Element[] = channels.map((channel) =>
         <ChannelCard key={channel.id} name={channel.data.name} id={channel.id} />
     );
 

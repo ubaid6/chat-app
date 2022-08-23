@@ -72,6 +72,21 @@ export const create_channel = StyleSheet.create({
     marginTop: 20,
     marginLeft: 10
   },
+
+  body_view : {
+    // backgroundColor:"red",
+    flex:0.5,
+  },
+
+  users : {
+    // backgroundColor:"green",
+    flex:3,
+  },
+
+  users_text : {
+    textAlign:"center",
+  },
+
 });
 
 export const channel_card = StyleSheet.create({
@@ -186,7 +201,6 @@ export const channel = StyleSheet.create({
     color:"black",
   }
 });
-
 
 
 

@@ -88,7 +88,7 @@ export const create_channel = StyleSheet.create({
   },
 
   user_active : {
-    backgroundColor:"green",
+    backgroundColor:"grey",
   },
 
   user_inactive : {

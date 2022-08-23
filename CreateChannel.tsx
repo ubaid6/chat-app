@@ -28,9 +28,10 @@ const CreateChannel = (): JSX.Element => {
     const createChannel = (): void => {
 
         const makeChannel = async (): Promise<any> => {
+            const usersToAdd = selectedUsers.map((user) => user.id);
             const channel = client.channel('messaging', name.toLowerCase(), {
                 name: name,
-                members: [user],
+                members: [user, ...usersToAdd],
             });
             await channel.create();
         }
@@ -76,8 +77,9 @@ const CreateChannel = (): JSX.Element => {
         <TouchableOpacity
         style={selectedUsers.includes(person) ? create_channel.user_active : create_channel.user_inactive}
         onPress={() => userPress(person)}
+        key = {person.id}
         >
-            <UserCard key={person.id} name={person.name} id={person.id} />
+            <UserCard name={person.name} id={person.id} />
         </TouchableOpacity>
     );
 

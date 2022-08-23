@@ -21,10 +21,21 @@ const CreateChannel = (): JSX.Element => {
     const [name, setName] = useState("");
     const { user, setUser } = useContext(UserContext);
     const [users, setUsers] = useState<Array<any>>([]);
+    const [selectedUsers, setSelectedUsers] = useState<Array<any>>([]);
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
 
     const createChannel = (): void => {
+
+        const makeChannel = async (): Promise<any> => {
+            const channel = client.channel('messaging', name.toLowerCase(), {
+                name: name,
+                members: [user],
+            });
+            await channel.create();
+        }
+    
+
         makeChannel().then(
             (result: any) => console.log("Channel created")
         )
@@ -34,24 +45,25 @@ const CreateChannel = (): JSX.Element => {
     }
 
 
-    const makeChannel = async (): Promise<any> => {
-        const channel = client.channel('messaging', name.toLowerCase(), {
-            name: name,
-            members: [user],
-        });
-        await channel.create();
-    }
-
-
     const getUsers = async (): Promise<any> => {
         const userList = await client.queryUsers({});
         return userList;
     }
 
+    const userPress = (person:any): void => {
+        if (selectedUsers.includes(person)) {
+            let filteredUsers = selectedUsers.filter((user) => person.id !== user.id) ;
+            setSelectedUsers([...filteredUsers]);
+        }
+        else setSelectedUsers([...selectedUsers, person]);
+
+        return;
+    }
+
     useEffect(() => {
         getUsers().then(
             (result) => {
-                let filteredResult = result.users.filter((person:any) => person.id !== user);
+                let filteredResult = result.users.filter((person: any) => person.id !== user);
                 setUsers([...filteredResult]);
             }
         ).catch(
@@ -59,8 +71,14 @@ const CreateChannel = (): JSX.Element => {
         );
     }, []);
 
+
     const userList: JSX.Element[] = users.map((person) =>
-        <UserCard key={person.id} name={person.name} id={person.id} />
+        <TouchableOpacity
+        style={selectedUsers.includes(person) ? create_channel.user_active : create_channel.user_inactive}
+        onPress={() => userPress(person)}
+        >
+            <UserCard key={person.id} name={person.name} id={person.id} />
+        </TouchableOpacity>
     );
 
 

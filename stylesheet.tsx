@@ -87,6 +87,14 @@ export const create_channel = StyleSheet.create({
     textAlign:"center",
   },
 
+  user_active : {
+    backgroundColor:"green",
+  },
+
+  user_inactive : {
+
+  },
+
 });
 
 export const channel_card = StyleSheet.create({

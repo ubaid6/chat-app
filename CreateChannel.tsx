@@ -50,7 +50,10 @@ const CreateChannel = (): JSX.Element => {
 
     useEffect(() => {
         getUsers().then(
-            (result) => setUsers(result.users)
+            (result) => {
+                let filteredResult = result.users.filter((person:any) => person.id !== user);
+                setUsers([...filteredResult]);
+            }
         ).catch(
             (e) => console.log(e)
         );

@@ -223,8 +223,24 @@ export const channel = StyleSheet.create({
     fontSize: 18,
     color: "black",
   },
+});
 
- 
+
+export const channel_info = StyleSheet.create({
+  header: {
+    backgroundColor: "cyan",
+    height: 70,
+    textAlign: "center",
+    flexDirection: "row",
+  },
+
+  back: {
+    marginTop: 20,
+    marginLeft: 20,
+    flex:1,
+    // backgroundColor:"yellow",
+  },
+
 
 });
 

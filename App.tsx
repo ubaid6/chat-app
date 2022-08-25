@@ -25,6 +25,7 @@ import {
   Button,
 } from 'react-native';
 import Channel from './Channel';
+import ChannelInfo from './ChannelInfo';
 
 const App = (): JSX.Element => {
 
@@ -34,12 +35,13 @@ const App = (): JSX.Element => {
   return (
     <NativeRouter>
       <UserContext.Provider value={{ user, setUser }}>
-        <ChannelContext.Provider value={{channelId, setChannelId}}>
+        <ChannelContext.Provider value={{ channelId, setChannelId }}>
           <Routes>
             <Route path="/" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/create-channel" element={<CreateChannel />} />
             <Route path="/channel" element={<Channel />} />
+            <Route path="/channel-info" element={<ChannelInfo />} />
           </Routes>
         </ChannelContext.Provider>
       </UserContext.Provider>

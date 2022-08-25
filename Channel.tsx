@@ -86,7 +86,7 @@ const Channel = (props: any): JSX.Element => {
                 </View>
 
                 <View style={channel.info}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigate('/channel-info')}>
                         <Image source={require('./images/info.png')}/>
                     </TouchableOpacity>
                 </View>

@@ -5,8 +5,8 @@ import { channel } from "./stylesheet";
 
 
 const Message = (props: any): JSX.Element => {
-    const {user, setUser} = useContext(UserContext);
-    var author:boolean = false;
+    const { user, setUser } = useContext(UserContext);
+    var author: boolean = false;
 
     if (props.userId === user)
         author = true;
@@ -15,7 +15,10 @@ const Message = (props: any): JSX.Element => {
 
     return (
         <>
-            <View style={author? channel.author_message : channel.other_message}>
+            <View style={author ? channel.author_message : channel.other_message}>
+                <Text style={channel.message_name}>
+                    {props.name}
+                </Text>
                 <Text style={channel.message_text}>
                     {props.text}
                 </Text>

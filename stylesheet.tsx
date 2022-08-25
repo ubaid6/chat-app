@@ -207,7 +207,13 @@ export const channel = StyleSheet.create({
 
   message_text : {
     color:"black",
-  }
+  },
+
+  message_name : {
+    fontSize:20,
+    color:"black",
+  },
+  
 });
 
 

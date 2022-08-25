@@ -84,6 +84,13 @@ const Channel = (props: any): JSX.Element => {
                         {currentChannel === null ? "" : currentChannel.data.name}
                     </Text>
                 </View>
+
+                <View style={channel.info}>
+                    <TouchableOpacity>
+                        <Image source={require('./images/info.png')}/>
+                    </TouchableOpacity>
+                </View>
+
             </View>
 
             <ScrollView

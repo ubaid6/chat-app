@@ -234,6 +234,10 @@ export const channel_info = StyleSheet.create({
     flexDirection: "row",
   },
 
+  text : {
+    textAlign:"center",
+  },
+
   back: {
     marginTop: 20,
     marginLeft: 20,

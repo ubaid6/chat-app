@@ -2,22 +2,17 @@ import React, { useContext, useState } from 'react';
 import { register } from './stylesheet';
 import { DefaultGenerics, StreamChat } from 'stream-chat';
 import {
-    SafeAreaView,
-    ScrollView,
     StatusBar,
-    StyleSheet,
     Text,
-    useColorScheme,
     View,
-    Button,
     TextInput,
     Alert,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import { useNavigate } from 'react-router-native';
 import { UserContext } from './Context';
 import { apiKeys } from './config';
-
+import { launchImageLibrary } from 'react-native-image-picker';
 
 
 
@@ -26,7 +21,22 @@ const Register = (): JSX.Element => {
     const { user, setUser } = useContext(UserContext);
     const [name, setName] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [image, setImage] = useState<any>(null);
     let navigate = useNavigate();
+
+    const handleImagePick = async (): Promise<any> => {
+        const options: any = {
+            maxWidth: 200,
+            maxHeight: 200,
+        };
+
+        await launchImageLibrary(options, (response: any) => {
+            console.log("response", response);
+            if (response.uri) {
+                setImage(response);
+            }
+        });
+    }
 
     const registerUsername = (): void => {
         if (name.length === 0) {
@@ -34,8 +44,6 @@ const Register = (): JSX.Element => {
             nameAlert();
         }
         else {
-
-
             console.log("Name entered: " + name);
             setUser(name.toLowerCase());
             connectClient(name, imageUrl).then(
@@ -79,13 +87,14 @@ const Register = (): JSX.Element => {
                 <Text>{'\n'}</Text>
 
                 <Text style={register.bodyText}>
-                    Enter an image URL
+                    Pick a profile image
                 </Text>
 
-                <TextInput
-                    style={register.bodyInput}
-                    onChangeText={newUrl => setImageUrl(newUrl)}
-                />
+                <TouchableOpacity style={register.submit} onPress={handleImagePick}>
+                    <Text style={register.bodyText}>
+                        Select Image
+                    </Text>
+                </TouchableOpacity>
 
                 <TouchableOpacity
                     style={register.submit}

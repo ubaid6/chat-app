@@ -36,7 +36,7 @@ const ChannelInfo = (): JSX.Element => {
     }, []);
 
     const memberList: JSX.Element[] = members.map((member: any) =>
-        <UserCard name={member} />
+        <UserCard key={member} name={member} />
     );
 
 

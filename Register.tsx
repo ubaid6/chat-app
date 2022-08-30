@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { register } from './stylesheet';
+import { channel, register } from './stylesheet';
 import { DefaultGenerics, StreamChat } from 'stream-chat';
 import {
     StatusBar,
@@ -12,7 +12,6 @@ import {
 import { useNavigate } from 'react-router-native';
 import { UserContext } from './Context';
 import { apiKeys } from './config';
-import { launchImageLibrary } from 'react-native-image-picker';
 
 
 
@@ -21,22 +20,8 @@ const Register = (): JSX.Element => {
     const { user, setUser } = useContext(UserContext);
     const [name, setName] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-    const [image, setImage] = useState<any>(null);
     let navigate = useNavigate();
 
-    const handleImagePick = async (): Promise<any> => {
-        const options: any = {
-            maxWidth: 200,
-            maxHeight: 200,
-        };
-
-        await launchImageLibrary(options, (response: any) => {
-            console.log("response", response);
-            if (response.uri) {
-                setImage(response);
-            }
-        });
-    }
 
     const registerUsername = (): void => {
         if (name.length === 0) {
@@ -53,7 +38,6 @@ const Register = (): JSX.Element => {
             )
             navigate("/home");
         }
-
     }
 
     const nameAlert = (): void => {
@@ -83,18 +67,6 @@ const Register = (): JSX.Element => {
                     style={register.bodyInput}
                     onChangeText={newName => setName(newName)}
                 />
-
-                <Text>{'\n'}</Text>
-
-                <Text style={register.bodyText}>
-                    Pick a profile image
-                </Text>
-
-                <TouchableOpacity style={register.submit} onPress={handleImagePick}>
-                    <Text style={register.bodyText}>
-                        Select Image
-                    </Text>
-                </TouchableOpacity>
 
                 <TouchableOpacity
                     style={register.submit}

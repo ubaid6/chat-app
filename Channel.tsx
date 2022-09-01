@@ -6,6 +6,7 @@ import { apiKeys } from "./config";
 import { channel, create_channel, register } from "./stylesheet";
 import { ChannelContext, UserContext } from "./Context";
 import Message from "./Message";
+import { launchImageLibrary } from "react-native-image-picker";
 
 
 const Channel = (props: any): JSX.Element => {
@@ -16,6 +17,7 @@ const Channel = (props: any): JSX.Element => {
     const [message, setMessage] = useState<string>("");
     const [messages, setMessages] = useState<Array<any>>([]);
     const [oldRefresh, refresh] = useState([0]);
+    const [image, setImage] = useState<any>(null);
     const scrollViewRef = useRef<any>();
 
     const client: StreamChat<DefaultGenerics> = StreamChat.getInstance(apiKeys.API_KEY);
@@ -42,6 +44,30 @@ const Channel = (props: any): JSX.Element => {
             (e) => console.log(e)
         );
         return;
+    }
+
+    const handleImagePick = async (): Promise<any> => {
+        const options: any = {
+            maxWidth: 200,
+            maxHeight: 200,
+        };
+
+        // await launchImageLibrary(options, (response: any) => {
+        //     console.log("response", response);
+        //     if (response.uri) {
+        //         setImage(response);
+        //     }
+        // });
+
+        launchImageLibrary(options).then(
+            (image) => {
+                currentChannel.sendImage(image).then(
+                    () => console.log("File sent")
+                )
+            }
+        ).catch(
+            (e) => console.log(e)
+        )
     }
 
     useEffect(() => {
@@ -102,7 +128,10 @@ const Channel = (props: any): JSX.Element => {
             </ScrollView>
 
             <View style={channel.message_box}>
-                <TouchableOpacity style={channel.attachment}>
+                <TouchableOpacity
+                    style={channel.attachment}
+                    onPress={handleImagePick}
+                >
                     <Image source={require('./images/attachment.png')} />
                 </TouchableOpacity>
 
@@ -112,7 +141,7 @@ const Channel = (props: any): JSX.Element => {
                     value={message}
                     onChangeText={(newMessage) => setMessage(newMessage)}
                 />
-                
+
                 <TouchableOpacity
                     style={channel.send_image}
                     onPress={handleSendMessage}

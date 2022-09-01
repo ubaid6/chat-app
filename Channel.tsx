@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useLocation, useNavigate } from "react-router-native";
+import { useNavigate } from "react-router-native";
 import { DefaultGenerics, StreamChat } from "stream-chat";
 import { apiKeys } from "./config";
 import { channel, create_channel, register } from "./stylesheet";
@@ -87,7 +87,7 @@ const Channel = (props: any): JSX.Element => {
 
                 <View style={channel.info}>
                     <TouchableOpacity onPress={() => navigate('/channel-info')}>
-                        <Image source={require('./images/info.png')}/>
+                        <Image source={require('./images/info.png')} />
                     </TouchableOpacity>
                 </View>
 
@@ -102,12 +102,17 @@ const Channel = (props: any): JSX.Element => {
             </ScrollView>
 
             <View style={channel.message_box}>
+                <TouchableOpacity style={channel.attachment}>
+                    <Image source={require('./images/attachment.png')} />
+                </TouchableOpacity>
+
                 <TextInput
                     style={channel.input}
                     multiline={true}
                     value={message}
                     onChangeText={(newMessage) => setMessage(newMessage)}
                 />
+                
                 <TouchableOpacity
                     style={channel.send_image}
                     onPress={handleSendMessage}
